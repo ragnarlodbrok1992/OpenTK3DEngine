@@ -15,6 +15,7 @@ namespace OpenTK3DEngine
     // Members of Engine class
     Triangle tutorial_triangle;
     Rectangle tutorial_rectangle;
+    PulsatingGreenTriangle tutorial_pulsating_green_triangle;
 
     // Main of our program - keep it above OOP bullshit
     public static void Main(String[] args)
@@ -32,6 +33,14 @@ namespace OpenTK3DEngine
       // Starting the engine - requires to run Run() method ;)
       using (Engine engine = new Engine(800, 600, "OpenTK3DEngine - development version"))
       {
+        // Before running some debug info or something
+
+        // Tutorial fun
+        int nrAttributes = 0;
+        GL.GetInteger(GetPName.MaxVertexAttribs, out nrAttributes);
+        Console.WriteLine("OpenGL properties");
+        Console.WriteLine("Vertex attributes supported: " + nrAttributes);
+
         engine.Run();
       }
       
@@ -48,6 +57,7 @@ namespace OpenTK3DEngine
     {
       this.tutorial_triangle = new Triangle();
       this.tutorial_rectangle = new Rectangle();
+      this.tutorial_pulsating_green_triangle = new PulsatingGreenTriangle();
     }
 
     // Overriding OnLoad method - runs once at the start of the engine
@@ -72,6 +82,7 @@ namespace OpenTK3DEngine
       // @TODO: should we do it by hand?
       tutorial_triangle.shader.Dispose();
       tutorial_rectangle.shader.Dispose();
+      tutorial_pulsating_green_triangle.shader.Dispose();
 
     }
 
@@ -96,8 +107,15 @@ namespace OpenTK3DEngine
       GL.Clear(ClearBufferMask.ColorBufferBit);
 
       // Code for rendering goes here
-      tutorial_rectangle.Render();
-      tutorial_triangle.Render();
+      // tutorial_rectangle.Render();
+      // tutorial_triangle.Render();
+
+      // This render needs to get deltaTime between frames
+      // @TODO: moliwa - find some way in opentk to have delta time
+      // between frames
+      float deltaTime = (float) UpdateTime;
+      Console.WriteLine("deltaTime: " + deltaTime);
+      // tutorial_pulsating_green_triangle.Render(deltaTime);
 
       SwapBuffers();
     }

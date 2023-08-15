@@ -8,7 +8,7 @@ namespace OpenTK3DEngine
     // As of OpenTK tutorial, many names for the same shit all around
     // This is a handle to compiled program consisting of both vertex
     // and fragment shader, neatly packed in one class.
-    int Handle;
+    public int Handle;
 
     // OOP problem - this is not even funny
     // https://www.khronos.org/opengl/wiki/Common_Mistakes#The_Object_Oriented_Language_Problem

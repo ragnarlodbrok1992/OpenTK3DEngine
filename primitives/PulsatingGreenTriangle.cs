@@ -1,14 +1,16 @@
-﻿using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL4;
 using OpenTK3DEngine;
 
 namespace OpenTK3DEngine
 {
-  public class Triangle
+  public class PulsatingGreenTriangle
   {
     // Members
     public int VertexBufferObject;
     public int VertexArrayObject;
     public Shader shader;
+
+    private float timeValue = 0.0f;
 
     public float[] vertices = {
       -0.5f, -0.5f, 0.0f, // Bottom-left vertex
@@ -21,11 +23,11 @@ namespace OpenTK3DEngine
     // shaders/default_shader.frag
     // shaders/default_shader.vert
 
-    public Triangle()
+    public PulsatingGreenTriangle()
     {
       // Loading shaders
       // 1. vertex, 2. fragment
-      shader = new Shader("shaders/default_shader.vert", "shaders/default_shader.frag");
+      shader = new Shader("shaders/pulsating_green.vert", "shaders/pulsating_green.frag");
 
       // Loading data to buffers
       this.VertexBufferObject = GL.GenBuffer();
@@ -49,13 +51,22 @@ namespace OpenTK3DEngine
     }
 
     // Finally rendering method!
-    public void Render()
+    public void Render(float dt)
     {
       shader.Use();
+
+      // Pulsating is here!
+      // Playing with uniforms. Those are accessed by NAME
+      // double timeValue = _timer.Elapsed.TotalSeconds;
+
+      timeValue += dt;
+      float greenValue = (float)Math.Sin(timeValue) / 2.0f + 0.5f;
+      int vertexColorLocation = GL.GetUniformLocation(shader.Handle, "ourColor");
+      GL.Uniform4(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+
       GL.BindVertexArray(VertexArrayObject);
       GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
     }
 
   }
-
 }
