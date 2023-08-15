@@ -14,6 +14,7 @@ namespace OpenTK3DEngine
   {
     // Members of Engine class
     Triangle tutorial_triangle;
+    Rectangle tutorial_rectangle;
 
     // Main of our program - keep it above OOP bullshit
     public static void Main(String[] args)
@@ -46,6 +47,7 @@ namespace OpenTK3DEngine
     /* Local initialization */
     {
       this.tutorial_triangle = new Triangle();
+      this.tutorial_rectangle = new Rectangle();
     }
 
     // Overriding OnLoad method - runs once at the start of the engine
