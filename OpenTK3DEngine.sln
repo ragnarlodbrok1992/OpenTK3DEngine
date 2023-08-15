@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTK3DEngine", "OpenTK3DEngine.csproj", "{5C3640BA-AF66-448A-B92E-F8CF8576B1EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C3640BA-AF66-448A-B92E-F8CF8576B1EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C3640BA-AF66-448A-B92E-F8CF8576B1EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C3640BA-AF66-448A-B92E-F8CF8576B1EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C3640BA-AF66-448A-B92E-F8CF8576B1EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8845AD8B-44B3-46DB-9172-C6B57CEEE560}
+	EndGlobalSection
+EndGlobal
