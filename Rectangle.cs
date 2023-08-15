@@ -8,6 +8,7 @@ namespace OpenTK3DEngine
     // Members
     public int VertexBufferObject;
     public int VertexArrayObject;
+    public int ElementBufferObject;
     public Shader shader;
 
     // Vertices
@@ -32,7 +33,7 @@ namespace OpenTK3DEngine
     {
       // Loading shaders
       // 1. vertex, 2. fragment
-      shader = new Shader("shaders/default_shader.vert", "shaders/default_shader.frag");
+      shader = new Shader("shaders/default_shader.vert", "shaders/rectangle_shader.frag");
 
       // Loading data to buffers
       this.VertexBufferObject = GL.GenBuffer();
@@ -43,13 +44,20 @@ namespace OpenTK3DEngine
           this.vertices,
           BufferUsageHint.StaticDraw);
 
+
       // Initializing VAO
       VertexArrayObject = GL.GenVertexArray();
 
       // Attaching data to shader stuuuuuufffff
       GL.BindVertexArray(VertexArrayObject);
       GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferObject);
-      GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
+      GL.BufferData(BufferTarget.ArrayBuffer, this.vertices.Length * sizeof(float), this.vertices, BufferUsageHint.StaticDraw);
+
+      // Should we bind EBO here?
+      this.ElementBufferObject = GL.GenBuffer();
+      GL.BindBuffer(BufferTarget.ElementArrayBuffer, this.ElementBufferObject);
+      GL.BufferData(BufferTarget.ElementArrayBuffer, this.indices.Length * sizeof(uint), indices, BufferUsageHint.StaticDraw);
+
       // Attrib Pointer are for actual shaders (only location, color in shader - shaders v 0.1)
       GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
       GL.EnableVertexAttribArray(0);
@@ -60,7 +68,8 @@ namespace OpenTK3DEngine
     {
       shader.Use();
       GL.BindVertexArray(VertexArrayObject);
-      GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
+      // GL.DrawArrays(PrimitiveType.Triangles, 0, 3); // Old stuff from triangle
+      GL.DrawElements(PrimitiveType.Triangles, indices.Length, DrawElementsType.UnsignedInt, 0);
     }
 
   }

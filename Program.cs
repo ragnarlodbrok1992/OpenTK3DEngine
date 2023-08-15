@@ -71,6 +71,7 @@ namespace OpenTK3DEngine
       // Disposing of shaders
       // @TODO: should we do it by hand?
       tutorial_triangle.shader.Dispose();
+      tutorial_rectangle.shader.Dispose();
 
     }
 
@@ -95,6 +96,7 @@ namespace OpenTK3DEngine
       GL.Clear(ClearBufferMask.ColorBufferBit);
 
       // Code for rendering goes here
+      tutorial_rectangle.Render();
       tutorial_triangle.Render();
 
       SwapBuffers();
