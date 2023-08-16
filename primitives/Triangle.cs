@@ -43,6 +43,7 @@ namespace OpenTK3DEngine
       GL.BindVertexArray(VertexArrayObject);
       GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferObject);
       GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
+
       // Attrib Pointer are for actual shaders (only location, color in shader - shaders v 0.1)
       GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
       GL.EnableVertexAttribArray(0);
