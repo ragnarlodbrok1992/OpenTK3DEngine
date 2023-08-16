@@ -17,6 +17,8 @@ namespace OpenTK3DEngine
     Rectangle tutorial_rectangle;
     PulsatingGreenTriangle tutorial_pulsating_green_triangle;
 
+    double totalTime = 0.0f;
+
     // Main of our program - keep it above OOP bullshit
     public static void Main(String[] args)
     {
@@ -113,9 +115,14 @@ namespace OpenTK3DEngine
       // This render needs to get deltaTime between frames
       // @TODO: moliwa - find some way in opentk to have delta time
       // between frames
-      float deltaTime = (float) UpdateTime;
-      Console.WriteLine("deltaTime: " + deltaTime);
-      // tutorial_pulsating_green_triangle.Render(deltaTime);
+      //
+      // Console.WriteLine("totalTime: " + totalTime);
+      // float deltaTime = (float) UpdateTime;
+      // Console.WriteLine("deltaTime: " + deltaTime);
+      //
+      totalTime += e.Time;
+      tutorial_pulsating_green_triangle.Render((float) totalTime);
+
 
       SwapBuffers();
     }

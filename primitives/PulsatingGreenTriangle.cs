@@ -59,8 +59,8 @@ namespace OpenTK3DEngine
       // Playing with uniforms. Those are accessed by NAME
       // double timeValue = _timer.Elapsed.TotalSeconds;
 
-      timeValue += dt;
-      float greenValue = (float)Math.Sin(timeValue) / 2.0f + 0.5f;
+      // timeValue += dt;
+      float greenValue = (float)Math.Sin(dt) / 2.0f + 0.5f;
       int vertexColorLocation = GL.GetUniformLocation(shader.Handle, "ourColor");
       GL.Uniform4(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 
