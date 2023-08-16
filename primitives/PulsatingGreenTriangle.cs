@@ -10,7 +10,7 @@ namespace OpenTK3DEngine
     public int VertexArrayObject;
     public Shader shader;
 
-    private float timeValue = 0.0f;
+    // private float timeValue = 0.0f;
 
     public float[] vertices = {
       -0.5f, -0.5f, 0.0f, // Bottom-left vertex

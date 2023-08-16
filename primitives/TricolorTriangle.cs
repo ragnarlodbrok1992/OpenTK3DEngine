@@ -31,7 +31,6 @@ namespace OpenTK3DEngine
       // Loading data to buffers
       this.VertexBufferObject = GL.GenBuffer();
       GL.BindBuffer(BufferTarget.ArrayBuffer, this.VertexBufferObject);
-
       GL.BufferData(BufferTarget.ArrayBuffer,
           this.vertices.Length * sizeof(float),
           this.vertices,

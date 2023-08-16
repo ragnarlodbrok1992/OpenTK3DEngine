@@ -13,12 +13,13 @@ namespace OpenTK3DEngine
   public class Engine : GameWindow
   {
     // Members of Engine class
-    Triangle tutorial_triangle;
-    Rectangle tutorial_rectangle;
-    PulsatingGreenTriangle tutorial_pulsating_green_triangle;
-    TricolorTriangle tutorial_tricolor_triangle;
+    // Triangle tutorial_triangle;
+    // Rectangle tutorial_rectangle;
+    // PulsatingGreenTriangle tutorial_pulsating_green_triangle;
+    // TricolorTriangle tutorial_tricolor_triangle;
+    TexturedRectangle tutorial_textured_rectangle;
 
-    double totalTime = 0.0f;
+    // double totalTime = 0.0f;
 
     // Main of our program - keep it above OOP bullshit
     public static void Main(String[] args)
@@ -58,10 +59,11 @@ namespace OpenTK3DEngine
         })
     /* Local initialization */
     {
-      this.tutorial_triangle = new Triangle();
-      this.tutorial_rectangle = new Rectangle();
-      this.tutorial_pulsating_green_triangle = new PulsatingGreenTriangle();
-      this.tutorial_tricolor_triangle = new TricolorTriangle();
+      // this.tutorial_triangle = new Triangle();
+      // this.tutorial_rectangle = new Rectangle();
+      // this.tutorial_pulsating_green_triangle = new PulsatingGreenTriangle();
+      // this.tutorial_tricolor_triangle = new TricolorTriangle();
+      this.tutorial_textured_rectangle = new TexturedRectangle();
     }
 
     // Overriding OnLoad method - runs once at the start of the engine
@@ -84,10 +86,11 @@ namespace OpenTK3DEngine
 
       // Disposing of shaders
       // @TODO: should we do it by hand?
-      tutorial_triangle.shader.Dispose();
-      tutorial_rectangle.shader.Dispose();
-      tutorial_pulsating_green_triangle.shader.Dispose();
-      tutorial_tricolor_triangle.shader.Dispose();
+      // tutorial_triangle.shader.Dispose();
+      // tutorial_rectangle.shader.Dispose();
+      // tutorial_pulsating_green_triangle.shader.Dispose();
+      // tutorial_tricolor_triangle.shader.Dispose();
+      tutorial_textured_rectangle.shader.Dispose();
 
     }
 
@@ -114,7 +117,8 @@ namespace OpenTK3DEngine
       // Code for rendering goes here
       // tutorial_rectangle.Render();
       // tutorial_triangle.Render();
-      tutorial_tricolor_triangle.Render();
+      // tutorial_tricolor_triangle.Render();
+      tutorial_textured_rectangle.Render();
 
       // This render needs to get deltaTime between frames
       // @TODO: moliwa - find some way in opentk to have delta time

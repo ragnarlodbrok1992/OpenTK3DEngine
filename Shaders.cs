@@ -98,5 +98,10 @@ namespace OpenTK3DEngine
     {
       GL.UseProgram(Handle);
     }
+
+    public int GetAttribLocation(string attrib)
+    {
+      return GL.GetAttribLocation(Handle, attrib);
+    }
   }
 }
