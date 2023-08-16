@@ -1,4 +1,4 @@
-#version 330 core // this might not work
+#version 330 core
 
 out vec4 outputColor;
 

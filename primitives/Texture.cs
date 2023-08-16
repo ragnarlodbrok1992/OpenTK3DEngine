@@ -16,7 +16,14 @@ namespace OpenTK3DEngine
       Handle = GL.GenTexture();
       this.filePath = filePath;
 
+      // Some global texture setup
+      GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) TextureWrapMode.Repeat);
+      GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int) TextureWrapMode.Repeat);
+      GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
+      GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+
       // Loading texture from OpenTK tutorial
+      GL.ActiveTexture(TextureUnit.Texture0);
       GL.BindTexture(TextureTarget.Texture2D, Handle);
       StbImage.stbi_set_flip_vertically_on_load(1);
       ImageResult image = ImageResult.FromStream(File.OpenRead(this.filePath), ColorComponents.RedGreenBlueAlpha);
@@ -27,7 +34,7 @@ namespace OpenTK3DEngine
 
     public void Use()
     {
-      GL.ActiveTexture(TextureUnit.Texture0);
+      // GL.ActiveTexture(TextureUnit.Texture0);
       GL.BindTexture(TextureTarget.Texture2D, Handle);
     }
   }
