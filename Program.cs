@@ -18,7 +18,8 @@ namespace OpenTK3DEngine
     // PulsatingGreenTriangle tutorial_pulsating_green_triangle;
     // TricolorTriangle tutorial_tricolor_triangle;
     // TexturedRectangle tutorial_textured_rectangle;
-    TexturedRotatingRectangle tutorial_textured_rotating_rectangle;
+    // TexturedRotatingRectangle tutorial_textured_rotating_rectangle;
+    TexturedRotatingCube tutorial_textured_rotating_cube;
 
     // double totalTime = 0.0f;
 
@@ -65,7 +66,8 @@ namespace OpenTK3DEngine
       // this.tutorial_pulsating_green_triangle = new PulsatingGreenTriangle();
       // this.tutorial_tricolor_triangle = new TricolorTriangle();
       // this.tutorial_textured_rectangle = new TexturedRectangle();
-      this.tutorial_textured_rotating_rectangle = new TexturedRotatingRectangle();
+      // this.tutorial_textured_rotating_rectangle = new TexturedRotatingRectangle();
+      this.tutorial_textured_rotating_cube = new TexturedRotatingCube();
     }
 
     // Overriding OnLoad method - runs once at the start of the engine
@@ -77,6 +79,7 @@ namespace OpenTK3DEngine
       base.OnLoad();
 
       GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+      GL.Enable(EnableCap.DepthTest);
 
       // Initialization code goes here
     }
@@ -93,7 +96,8 @@ namespace OpenTK3DEngine
       // tutorial_pulsating_green_triangle.shader.Dispose();
       // tutorial_tricolor_triangle.shader.Dispose();
       // tutorial_textured_rectangle.shader.Dispose();
-      tutorial_textured_rotating_rectangle.shader.Dispose();
+      // tutorial_textured_rotating_rectangle.shader.Dispose();
+      tutorial_textured_rotating_cube.shader.Dispose();
 
     }
 
@@ -115,7 +119,7 @@ namespace OpenTK3DEngine
     {
       base.OnRenderFrame(e);
 
-      GL.Clear(ClearBufferMask.ColorBufferBit);
+      GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
       // Code for rendering goes here
       // tutorial_rectangle.Render();
@@ -133,7 +137,8 @@ namespace OpenTK3DEngine
       //
       // totalTime += e.Time;
       // tutorial_pulsating_green_triangle.Render((float) totalTime);
-      tutorial_textured_rotating_rectangle.Render((float) e.Time);
+      // tutorial_textured_rotating_rectangle.Render((float) e.Time);
+      tutorial_textured_rotating_cube.Render((float) e.Time);
 
 
       SwapBuffers();
