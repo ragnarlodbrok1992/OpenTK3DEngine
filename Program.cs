@@ -17,7 +17,8 @@ namespace OpenTK3DEngine
     // Rectangle tutorial_rectangle;
     // PulsatingGreenTriangle tutorial_pulsating_green_triangle;
     // TricolorTriangle tutorial_tricolor_triangle;
-    TexturedRectangle tutorial_textured_rectangle;
+    // TexturedRectangle tutorial_textured_rectangle;
+    TexturedRotatingRectangle tutorial_textured_rotating_rectangle;
 
     // double totalTime = 0.0f;
 
@@ -63,7 +64,8 @@ namespace OpenTK3DEngine
       // this.tutorial_rectangle = new Rectangle();
       // this.tutorial_pulsating_green_triangle = new PulsatingGreenTriangle();
       // this.tutorial_tricolor_triangle = new TricolorTriangle();
-      this.tutorial_textured_rectangle = new TexturedRectangle();
+      // this.tutorial_textured_rectangle = new TexturedRectangle();
+      this.tutorial_textured_rotating_rectangle = new TexturedRotatingRectangle();
     }
 
     // Overriding OnLoad method - runs once at the start of the engine
@@ -90,7 +92,8 @@ namespace OpenTK3DEngine
       // tutorial_rectangle.shader.Dispose();
       // tutorial_pulsating_green_triangle.shader.Dispose();
       // tutorial_tricolor_triangle.shader.Dispose();
-      tutorial_textured_rectangle.shader.Dispose();
+      // tutorial_textured_rectangle.shader.Dispose();
+      tutorial_textured_rotating_rectangle.shader.Dispose();
 
     }
 
@@ -118,7 +121,7 @@ namespace OpenTK3DEngine
       // tutorial_rectangle.Render();
       // tutorial_triangle.Render();
       // tutorial_tricolor_triangle.Render();
-      tutorial_textured_rectangle.Render();
+      // tutorial_textured_rectangle.Render();
 
       // This render needs to get deltaTime between frames
       // @TODO: moliwa - find some way in opentk to have delta time
@@ -130,6 +133,7 @@ namespace OpenTK3DEngine
       //
       // totalTime += e.Time;
       // tutorial_pulsating_green_triangle.Render((float) totalTime);
+      tutorial_textured_rotating_rectangle.Render((float) e.Time);
 
 
       SwapBuffers();
