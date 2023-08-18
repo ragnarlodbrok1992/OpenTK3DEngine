@@ -1,5 +1,6 @@
 ﻿// Global imports
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 
 namespace OpenTK3DEngine
 {
@@ -102,6 +103,17 @@ namespace OpenTK3DEngine
     public int GetAttribLocation(string attrib)
     {
       return GL.GetAttribLocation(Handle, attrib);
+    }
+
+    public int GetUniformLocation(string name)
+    {
+      return GL.GetUniformLocation(Handle, name);
+    }
+
+    public void SetMatrix4(string name, Matrix4 data)
+    {
+      GL.UseProgram(Handle);
+      GL.UniformMatrix4(GetUniformLocation(name), true, ref data);
     }
   }
 }

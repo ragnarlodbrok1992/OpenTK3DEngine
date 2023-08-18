@@ -12,23 +12,32 @@ namespace OpenTK3DEngine
 { 
   public class Engine : GameWindow
   {
-    // Members textured cubes
-    // @TODO moliwa: move to container
-    TexturedCube tex_cube;
+    // Members of Engine class
+    // Triangle tutorial_triangle;
+    // Rectangle tutorial_rectangle;
+    // PulsatingGreenTriangle tutorial_pulsating_green_triangle;
+    // TricolorTriangle tutorial_tricolor_triangle;
+    // TexturedRectangle tutorial_textured_rectangle;
+    // TexturedRotatingRectangle tutorial_textured_rotating_rectangle;
+    TexturedRotatingCube tutorial_textured_rotating_cube;
 
-    double totalTime = 0.0f;
+    // double totalTime = 0.0f;
 
     // Main of our program - keep it above OOP bullshit
     public static void Main(String[] args)
     {
       // Hello messages
-      Console.WriteLine(GLOBALS.ENGINE_TITLE_BAR);
+      Console.WriteLine("OpenTK3DEngine - development version");
+
+      // DEBUG - printing out triangle stuff - with our own Util function
+      // Triangle tutorial_triangle = new Triangle();
+      // Util.printArray(tutorial_triangle.vertices);
+
+      // Array.ForEach(tutorial_triangle.vertices, Console.WriteLine);
+      // Console.WriteLine("[{0}]", string.Join(", ", tutorial_triangle.vertices));
 
       // Starting the engine - requires to run Run() method ;)
-      using (Engine engine = new Engine(
-            GLOBALS.ENGINE_WIDTH,
-            GLOBALS.ENGINE_HEIGHT,
-            GLOBALS.ENGINE_TITLE_BAR))
+      using (Engine engine = new Engine(800, 600, "OpenTK3DEngine - development version"))
       {
         // Before running some debug info or something
 
@@ -52,7 +61,13 @@ namespace OpenTK3DEngine
         })
     /* Local initialization */
     {
-      tex_cube = new TexturedCube("assets/box.png");
+      // this.tutorial_triangle = new Triangle();
+      // this.tutorial_rectangle = new Rectangle();
+      // this.tutorial_pulsating_green_triangle = new PulsatingGreenTriangle();
+      // this.tutorial_tricolor_triangle = new TricolorTriangle();
+      // this.tutorial_textured_rectangle = new TexturedRectangle();
+      // this.tutorial_textured_rotating_rectangle = new TexturedRotatingRectangle();
+      this.tutorial_textured_rotating_cube = new TexturedRotatingCube();
     }
 
     // Overriding OnLoad method - runs once at the start of the engine
@@ -75,7 +90,15 @@ namespace OpenTK3DEngine
       base.OnUnload();
 
       // Disposing of shaders
-      tex_cube.shader.Dispose();
+      // @TODO: should we do it by hand?
+      // tutorial_triangle.shader.Dispose();
+      // tutorial_rectangle.shader.Dispose();
+      // tutorial_pulsating_green_triangle.shader.Dispose();
+      // tutorial_tricolor_triangle.shader.Dispose();
+      // tutorial_textured_rectangle.shader.Dispose();
+      // tutorial_textured_rotating_rectangle.shader.Dispose();
+      tutorial_textured_rotating_cube.shader.Dispose();
+
     }
 
     // Overriding OnUpdateFrame method
@@ -97,10 +120,26 @@ namespace OpenTK3DEngine
       base.OnRenderFrame(e);
 
       GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-      totalTime += e.Time;
 
-      // Render objects here
-      tex_cube.Render((float) e.Time);
+      // Code for rendering goes here
+      // tutorial_rectangle.Render();
+      // tutorial_triangle.Render();
+      // tutorial_tricolor_triangle.Render();
+      // tutorial_textured_rectangle.Render();
+
+      // This render needs to get deltaTime between frames
+      // @TODO: moliwa - find some way in opentk to have delta time
+      // between frames
+      //
+      // Console.WriteLine("totalTime: " + totalTime);
+      // float deltaTime = (float) UpdateTime;
+      // Console.WriteLine("deltaTime: " + deltaTime);
+      //
+      // totalTime += e.Time;
+      // tutorial_pulsating_green_triangle.Render((float) totalTime);
+      // tutorial_textured_rotating_rectangle.Render((float) e.Time);
+      tutorial_textured_rotating_cube.Render((float) e.Time);
+
 
       SwapBuffers();
     }
