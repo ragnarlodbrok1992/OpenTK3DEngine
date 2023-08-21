@@ -1,6 +1,8 @@
 ﻿// Global imports
 using System;
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.Input;
+using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
@@ -17,6 +19,8 @@ namespace OpenTK3DEngine
     TexturedCube tex_cube;
 
     double totalTime = 0.0f;
+    bool firstMove = true;
+    // bool firstClick = false;
 
     // Main of our program - keep it above OOP bullshit
     public static void Main(String[] args)
@@ -83,10 +87,61 @@ namespace OpenTK3DEngine
     {
       base.OnUpdateFrame(e);
 
-      if (KeyboardState.IsKeyDown(Keys.Escape))
+      // Not focused - not processing input
+      if (!IsFocused)
       {
-        Close();
+        return;
+      } else
+      {
+        // Processing input
+        // Closing engine
+        if (KeyboardState.IsKeyDown(Keys.Escape))
+        {
+          Close();
+        }
+
+        // Camera movements
+        if (KeyboardState.IsKeyDown(Keys.W))
+        {
+          Camera.position += Camera.front * Camera.speed * (float) e.Time;
+        }
+        if (KeyboardState.IsKeyDown(Keys.S))
+        {
+          Camera.position -= Camera.front * Camera.speed * (float) e.Time;
+        }
+        if (KeyboardState.IsKeyDown(Keys.A))
+        {
+          Camera.position -= Vector3.Normalize(Vector3.Cross(Camera.front, Camera.up)) * Camera.speed * (float) e.Time;
+        }
+        if (KeyboardState.IsKeyDown(Keys.D))
+        {
+          Camera.position += Vector3.Normalize(Vector3.Cross(Camera.front, Camera.up)) * Camera.speed * (float) e.Time;
+        }
+        if (KeyboardState.IsKeyDown(Keys.Space))
+        {
+          Camera.position += Camera.up * Camera.speed * (float) e.Time;
+        }
+        if (KeyboardState.IsKeyDown(Keys.LeftShift))
+        {
+          Camera.position -= Camera.up * Camera.speed * (float) e.Time;
+        }
+
+        // Camera rotation
+        // Only rotate camera while you have left mouse button held
+        if (MouseState[MouseButton.Left])
+        {
+          if (firstMove)
+          {
+            var lastPos = new Vector2(MouseState.X, MouseState.Y);
+            firstMove = false;
+          }
+          else
+          {
+            // TODO - implement rotation <3
+          }
+        }
       }
+
     }
 
     // Overriding OnRenderFrame method
@@ -98,6 +153,9 @@ namespace OpenTK3DEngine
 
       GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
       totalTime += e.Time;
+
+      // Override VIEW matrix for shaders with stuff that we have in camera
+      GLOBALS.VIEW = Matrix4.LookAt(Camera.position, Camera.position + Camera.front, Camera.up);
 
       // Render objects here
       tex_cube.Render((float) e.Time);

@@ -9,11 +9,32 @@
 // Camera object will received input events (keys or mouse)
 // and modify GLOBAL view matrix depending on various of factors.
 // It's static since we only want to have one camera.
+using OpenTK.Mathematics;
 
 namespace OpenTK3DEngine
 {
   public static class Camera
   {
+    // Basically modifies View matrix ??
+    // Members
+    /*
+    static Vector3 cameraPos = new Vector3(0.0f, 0.0f, 3.0f);
+    static Vector3 cameraTarget = Vector3.Zero;
+    static Vector3 cameraDirection = Vector3.Normalize(cameraPos - cameraTarget);
+    static Vector3 up = Vector3.UnitY;
+    static Vector3 cameraRight = Vector3.Normalize(Vector3.Cross(up, cameraDirection));
+    static Vector3 cameraUp = Vector3.Cross(cameraDirection, cameraRight);
+    */
+
+    public static float speed = 1.5f;
+
+    public static Vector3 position = new Vector3(0.0f, 0.0f, 3.0f);
+    public static Vector3 front    = new Vector3(0.0f, 0.0f, -1.0f);
+    public static Vector3 up       = new Vector3(0.0f, 1.0f, 0.0f);
+
+    public static Matrix4 view = Matrix4.LookAt(new Vector3(0.0f, 0.0f, 3.0f),
+        new Vector3(0.0f, 0.0f, 0.0f),
+        new Vector3(0.0f, 1.0f, 0.0f));
 
   }
 
