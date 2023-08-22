@@ -26,7 +26,8 @@ namespace OpenTK3DEngine
     static Vector3 cameraUp = Vector3.Cross(cameraDirection, cameraRight);
     */
 
-    public static float speed = 1.5f;
+    public static float speed = 15.0f;
+    public static float sensitivity = 0.0015f;
 
     public static Vector3 position = new Vector3(0.0f, 0.0f, 3.0f);
     public static Vector3 front    = new Vector3(0.0f, 0.0f, -1.0f);
@@ -35,6 +36,9 @@ namespace OpenTK3DEngine
     public static Matrix4 view = Matrix4.LookAt(new Vector3(0.0f, 0.0f, 3.0f),
         new Vector3(0.0f, 0.0f, 0.0f),
         new Vector3(0.0f, 1.0f, 0.0f));
+
+    public static float yaw = 0.0f;
+    public static float pitch = 0.0f;
 
   }
 

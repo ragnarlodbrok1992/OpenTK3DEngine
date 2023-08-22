@@ -20,6 +20,7 @@ namespace OpenTK3DEngine
 
     double totalTime = 0.0f;
     bool firstMove = true;
+    Vector2 lastPos;
     // bool firstClick = false;
 
     // Main of our program - keep it above OOP bullshit
@@ -82,6 +83,18 @@ namespace OpenTK3DEngine
       tex_cube.shader.Dispose();
     }
 
+    // Overriding OnMosueMove
+    protected override void OnMouseMove(MouseMoveEventArgs e)
+    {
+      base.OnMouseMove(e);
+
+      if (IsFocused)
+      {
+        // This framework is fuckin garbage
+        // MouseState.Position(e.X + GLOBALS.ENGINE_WIDTH/2f, e.Y + GLOBALS.ENGINE_HEIGHT/2f);
+      }
+    }
+
     // Overriding OnUpdateFrame method
     protected override void OnUpdateFrame(FrameEventArgs e)
     {
@@ -132,12 +145,49 @@ namespace OpenTK3DEngine
         {
           if (firstMove)
           {
-            var lastPos = new Vector2(MouseState.X, MouseState.Y);
+            lastPos = new Vector2(MouseState.X, MouseState.Y);
             firstMove = false;
           }
           else
           {
             // TODO - implement rotation <3
+            // TODO - make mouse dissapear while clicked
+            
+            float deltaX = MouseState.X - lastPos.X;
+            float deltaY = MouseState.Y - lastPos.Y;
+            lastPos = new Vector2(MouseState.X, MouseState.Y);
+
+            // Console.WriteLine("(X, Y) = " + deltaX + " " + deltaY);
+            Camera.yaw += deltaX * Camera.sensitivity;
+            Camera.pitch -= deltaY * Camera.sensitivity;
+
+            if (Camera.pitch > 89.0f)
+              {
+                Camera.pitch = 89.0f;
+              }
+            else if (Camera.pitch < -89.0f)
+            {
+              Camera.pitch = -89.0f;
+            }
+            else 
+            {
+              Camera.pitch -= deltaX * Camera.sensitivity;
+            }
+
+            // Last thing - new front vector
+            Camera.front.X = (float)Math.Cos(MathHelper.DegreesToRadians(Camera.pitch)) * (float)Math.Cos(MathHelper.DegreesToRadians(Camera.yaw));
+            Camera.front.Y = (float)Math.Sin(MathHelper.DegreesToRadians(Camera.pitch));
+            Camera.front.Z = (float)Math.Cos(MathHelper.DegreesToRadians(Camera.pitch)) * (float)Math.Sin(MathHelper.DegreesToRadians(Camera.yaw));
+
+            Console.WriteLine("DEBUG==========");
+            Console.WriteLine("Camera.yaw   = " + Camera.yaw);
+            Console.WriteLine("Camera.pitch = " + Camera.pitch);
+            Console.WriteLine("(Before normalizing) Camera.front = " + Camera.front);
+
+            Camera.front = Vector3.Normalize(Camera.front);
+
+            Console.WriteLine("(After normalizing)  Camera.front = " + Camera.front);
+
           }
         }
       }
@@ -171,6 +221,10 @@ namespace OpenTK3DEngine
       base.OnResize(e);
 
       GL.Viewport(0, 0, e.Width, e.Height);
+
+      // Update engine program
+      GLOBALS.ENGINE_WIDTH = e.Width;
+      GLOBALS.ENGINE_HEIGHT = e.Height;
     }
 
     // End of Engine class

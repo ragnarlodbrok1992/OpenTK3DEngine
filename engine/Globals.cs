@@ -13,8 +13,8 @@ namespace OpenTK3DEngine
   public static class GLOBALS
   {
     // Engine variables
-    public const int ENGINE_WIDTH  = 800;
-    public const int ENGINE_HEIGHT = 600;
+    public static int ENGINE_WIDTH  = 800;
+    public static int ENGINE_HEIGHT = 600;
 
     public const string ENGINE_TITLE_BAR = "OpenTK3DEngine - development version.";
 
